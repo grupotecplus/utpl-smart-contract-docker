@@ -1,16 +1,30 @@
-# Ejercicio 4: Smart Contract con Truffle y Docker
+# Tarea: Implementación inicial de smart contract en contenedor Docker
 
-Este ejercicio contiene un contrato Solidity simple usando Truffle. Esta preparado para ejecutarse con Docker Compose y para construir una imagen que se pueda subir a Docker Hub.
+## Resultado de aprendizaje
+
+Implementar técnicas de contenedores y orquestación, prácticas de DevOps, servicios en la nube, arquitecturas serverless y Kubernetes, utilizando estos conocimientos para mejorar la eficiencia y escalabilidad de las aplicaciones.
+
+## Descripción
+
+Este proyecto corresponde a la actividad "Implementación inicial de smart contract en contenedor Docker". Se desarrolló un smart contract básico en Solidity utilizando Truffle y Ganache, el cual fue empaquetado en una imagen Docker y publicado en Docker Hub.
+
+El repositorio incluye:
+
+* Dockerfile para la construcción de la imagen.
+* Código fuente del smart contract.
+* Configuración de Docker Compose para Ganache y Truffle.
+* Scripts de despliegue e interacción.
+* Pruebas automatizadas del contrato.
 
 ## Contrato
 
 `contracts/HolaUTPL.sol` permite:
 
-- Consultar el mensaje publico `mensaje`.
-- Actualizar el mensaje con `actualizarMensaje`.
-- Emitir el evento `MensajeActualizado`.
+* Consultar el mensaje público `mensaje`.
+* Actualizar el mensaje almacenado en el contrato.
+* Verificar la interacción con la blockchain local mediante Ganache.
 
-## Comandos locales
+## Comandos de ejecución
 
 Levantar Ganache:
 
@@ -30,13 +44,13 @@ Ejecutar pruebas:
 docker compose run --rm truffle npx truffle test
 ```
 
-Desplegar el contrato en Ganache:
+Desplegar contrato:
 
 ```bash
 docker compose run --rm truffle npx truffle migrate --network development
 ```
 
-Interactuar con el contrato desplegado:
+Interactuar con el contrato:
 
 ```bash
 docker compose run --rm truffle npx truffle exec scripts/interact.js --network development
@@ -48,37 +62,16 @@ Detener servicios:
 docker compose down
 ```
 
-Limpiar volumen de dependencias si se desea empezar desde cero:
-
-```bash
-docker compose down -v
-```
-
-## Imagen para Docker Hub
+## Imagen Docker Hub
 
 Construir imagen:
 
 ```bash
-docker build -t TU_USUARIO_DOCKERHUB/smart-contract-truffle-docker:1.0.0 .
+docker build -t grupotecplus/smart-contract-truffle-docker:1.0.0 .
 ```
 
-Iniciar sesion:
+Publicar imagen:
 
 ```bash
-docker login
+docker push grupotecplus/smart-contract-truffle-docker:1.0.0
 ```
-
-Subir imagen:
-
-```bash
-docker push TU_USUARIO_DOCKERHUB/smart-contract-truffle-docker:1.0.0
-```
-
-Probar imagen descargada:
-
-```bash
-docker pull TU_USUARIO_DOCKERHUB/smart-contract-truffle-docker:1.0.0
-docker run --rm TU_USUARIO_DOCKERHUB/smart-contract-truffle-docker:1.0.0
-```
-
-El comando anterior compila el contrato dentro del contenedor. Para probar, migrar e interactuar con Ganache se recomienda usar `docker compose`.
