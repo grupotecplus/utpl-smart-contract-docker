@@ -75,3 +75,9 @@ Publicar imagen:
 ```bash
 docker push grupotecplus/smart-contract-truffle-docker:1.0.0
 ```
+
+## Evidencia de ejecución en Portainer
+
+Se muestra el contenedor de Ganache ejecutándose correctamente en Docker.
+
+![Portainer](images/portainer.png)
